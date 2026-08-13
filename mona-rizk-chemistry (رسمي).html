@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منى رزق | الكيمياء</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@300;400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F1F6F4;
+    --surface:#FFFFFF;
+    --ink:#10262A;
+    --ink-soft:#4A6763;
+    --teal:#1F6F5C;
+    --teal-deep:#0E2E29;
+    --teal-mid:#175248;
+    --gold:#E3A23C;
+    --gold-soft:#F4D9A8;
+    --red:#C1443A;
+    --line:#D8E6E1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--bg); color:var(--ink); font-family:'Tajawal',sans-serif; scroll-behavior:smooth;}
+  body{min-height:100vh;}
+  h1,h2,h3,.display{font-family:'Almarai',sans-serif;}
+  .mono{font-family:'IBM Plex Mono',monospace; direction:ltr; unicode-bidi:isolate;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  .hidden{display:none !important;}
+  img,svg{display:block;}
+
+  /* ---------- shared layout ---------- */
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  .topbar{position:sticky; top:0; z-index:50; background:rgba(241,246,244,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; height:72px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-tile{width:38px; height:38px; border-radius:9px; background:var(--teal-deep); color:var(--gold-soft); display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; line-height:1;}
+  .brand-tile .sym{font-size:15px; font-weight:600; color:#fff;}
+  .brand-name{font-family:'Almarai',sans-serif; font-weight:800; font-size:18px;}
+  .brand-name span{color:var(--teal);}
+  .nav-actions{display:flex; align-items:center; gap:10px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:999px; border:1px solid transparent; font-weight:700; font-size:14.5px; transition:transform .15s ease, background .15s ease, box-shadow .15s ease;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--teal); color:#fff;}
+  .btn-primary:hover{background:var(--teal-mid);}
+  .btn-ghost{background:transparent; color:var(--teal-deep); border-color:var(--line);}
+  .btn-ghost:hover{background:#fff;}
+  .btn-gold{background:var(--gold); color:var(--teal-deep);}
+  .btn-gold:hover{box-shadow:0 6px 18px rgba(227,162,60,.35);}
+  .btn-sm{padding:7px 14px; font-size:13px; border-radius:8px;}
+  .btn-danger{background:transparent; color:var(--red); border-color:#EFCFCB;}
+  .btn-danger:hover{background:#FBEEEC;}
+
+  /* ---------- HOME ---------- */
+  #view-home{display:block;}
+  .hero{background:radial-gradient(circle at 15% 20%, #12403A, var(--teal-deep) 60%); color:#fff; padding:76px 0 90px; position:relative; overflow:hidden;}
+  .hero::after{content:""; position:absolute; inset:0; background-image:radial-gradient(#ffffff14 1px, transparent 1px); background-size:26px 26px; opacity:.5; pointer-events:none;}
+  .hero .wrap{display:grid; grid-template-columns:280px 1fr; gap:56px; align-items:center; position:relative;}
+  .element-tile{width:260px; height:260px; border-radius:22px; background:linear-gradient(155deg,#153E37,#0A2622); border:1px solid #ffffff22; padding:22px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 30px 60px -20px rgba(0,0,0,.55);}
+  .element-tile .num{font-family:'IBM Plex Mono',monospace; color:var(--gold-soft); font-size:15px;}
+  .element-tile .sym{font-family:'Almarai',sans-serif; font-size:84px; font-weight:800; color:#fff; text-align:center; line-height:1;}
+  .element-tile .name{font-family:'IBM Plex Mono',monospace; color:#BFE0D6; font-size:13px; text-align:center;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; color:var(--gold-soft); font-size:13px; letter-spacing:.06em; margin-bottom:14px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--gold-soft);}
+  .hero h1{font-size:44px; line-height:1.25; font-weight:800; margin-bottom:18px;}
+  .hero h1 em{font-style:normal; color:var(--gold-soft);}
+  .hero p.lead{color:#D3E7E1; font-size:17px; line-height:1.9; max-width:560px; margin-bottom:30px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  section{padding:74px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head .eyebrow{color:var(--teal);}
+  .section-head .eyebrow::before{background:var(--teal);}
+  .section-head h2{font-size:30px; font-weight:800; line-height:1.4; margin-bottom:10px;}
+  .section-head p{color:var(--ink-soft); font-size:15.5px; line-height:1.8;}
+
+  .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:28px;}
+  .card .mini-tile{width:42px; height:42px; border-radius:10px; background:var(--teal-deep); color:#fff; font-family:'IBM Plex Mono',monospace; font-size:13px; display:flex; align-items:center; justify-content:center; margin-bottom:18px;}
+  .card h3{font-size:17.5px; margin-bottom:10px; font-weight:700;}
+  .card p{color:var(--ink-soft); font-size:14.5px; line-height:1.85;}
+
+  .stages{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .stage-card{border-radius:var(--radius); padding:30px; border:1px solid var(--line); background:linear-gradient(180deg,#fff,#F6FAF8);}
+  .stage-card .tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:12px; background:var(--gold-soft); color:#6B4A11; padding:4px 10px; border-radius:6px; margin-bottom:16px;}
+  .stage-card h3{font-size:20px; margin-bottom:8px;}
+  .stage-card ul{margin-top:16px; display:flex; flex-direction:column; gap:8px;}
+  .stage-card li{font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:flex-start;}
+  .stage-card li::before{content:"—"; color:var(--teal);}
+
+  .cta-band{background:var(--teal-deep); color:#fff; border-radius:20px; padding:52px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .cta-band h2{font-size:25px; margin-bottom:8px;}
+  .cta-band p{color:#CFE6DF; font-size:14.5px;}
+
+  footer{border-top:1px solid var(--line); padding:34px 0; color:var(--ink-soft); font-size:13.5px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  /* ---------- DASHBOARD ---------- */
+  #view-dashboard{display:none; padding-bottom:60px;}
+  .dash-tabs{display:flex; gap:6px; margin:28px 0 26px; border-bottom:1px solid var(--line); overflow-x:auto;}
+  .dash-tab{padding:12px 18px; font-weight:700; font-size:14.5px; color:var(--ink-soft); border-bottom:2px solid transparent; white-space:nowrap;}
+  .dash-tab.active{color:var(--teal-deep); border-color:var(--teal);}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .grid2{display:grid; grid-template-columns:360px 1fr; gap:22px; align-items:start;}
+  .box{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px;}
+  .box h3{font-size:16px; margin-bottom:16px; display:flex; align-items:center; gap:8px;}
+  .box h3 .dot{width:7px; height:7px; border-radius:50%; background:var(--teal);}
+
+  .field{margin-bottom:13px;}
+  .field label{display:block; font-size:12.5px; color:var(--ink-soft); margin-bottom:6px; font-weight:700;}
+  .field input, .field select{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:14px; background:#FBFDFC; color:var(--ink);}
+  .field input:focus, .field select:focus{outline:2px solid var(--teal); outline-offset:1px; border-color:var(--teal);}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th{text-align:right; color:var(--ink-soft); font-weight:700; font-size:12.5px; padding:10px 12px; border-bottom:1px solid var(--line);}
+  td{padding:11px 12px; border-bottom:1px solid #EEF4F2;}
+  tr:last-child td{border-bottom:none;}
+  .table-wrap{overflow-x:auto;}
+  .row-actions{display:flex; gap:6px;}
+
+  .badge{display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700;}
+  .badge-yes{background:#E4F3EC; color:#1F6F5C;}
+  .badge-no{background:#FBEBEA; color:#C1443A;}
+
+  .empty{text-align:center; padding:40px 20px; color:var(--ink-soft); font-size:14px;}
+  .empty .mini-tile{margin:0 auto 14px;}
+
+  .session-list-item{padding:12px 14px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; cursor:pointer; transition:border-color .12s;}
+  .session-list-item:hover{border-color:var(--teal);}
+  .session-list-item.active{border-color:var(--teal); background:#F0F8F5;}
+  .session-list-item .d{font-size:12px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+  .session-list-item .t{font-weight:700; font-size:14px; margin-top:2px;}
+
+  .att-row{display:grid; grid-template-columns:1fr 90px 110px; gap:12px; align-items:center; padding:10px 0; border-bottom:1px solid #EEF4F2;}
+  .att-row:last-child{border-bottom:none;}
+  .att-name{font-weight:700; font-size:14px;}
+  .att-name .code{display:block; font-size:11.5px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-weight:400; margin-top:2px;}
+  .att-row input[type="number"]{width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:7px; font-size:13.5px;}
+  .toggle{display:flex; align-items:center; gap:8px; justify-content:center; cursor:pointer; user-select:none;}
+  .toggle input{width:17px; height:17px; accent-color:var(--teal);}
+
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:22px;}
+  .stat-box{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px;}
+  .stat-box .v{font-family:'Almarai',sans-serif; font-size:26px; font-weight:800; color:var(--teal-deep);}
+  .stat-box .l{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+
+  .toast{position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--teal-deep); color:#fff; padding:12px 22px; border-radius:999px; font-size:13.5px; font-weight:700; opacity:0; pointer-events:none; transition:all .25s ease; z-index:100;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  .settings-link{font-size:12.5px; color:var(--ink-soft); cursor:pointer; text-decoration:underline; text-underline-offset:3px;}
+
+  @media(max-width:860px){
+    .hero .wrap{grid-template-columns:1fr; text-align:center;}
+    .element-tile{margin:0 auto;}
+    .eyebrow{justify-content:center;}
+    .hero-ctas{justify-content:center;}
+    .cards3{grid-template-columns:1fr;}
+    .stages{grid-template-columns:1fr;}
+    .grid2{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .cta-band{flex-direction:column; text-align:center;}
+    .att-row{grid-template-columns:1fr 70px 90px;}
+    .stat-row{grid-template-columns:1fr;}
+    footer{flex-direction:column; text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand" onclick="Nav.show('home')" style="cursor:pointer;">
+      <div class="brand-tile"><span class="num">25</span><span class="sym">Mn</span></div>
+      <div class="brand-name">منى رزق <span>| كيمياء</span></div>
+    </div>
+    <div class="nav-actions">
+      <span id="sound-toggle" class="btn btn-ghost btn-sm" onclick="Sound.toggle()" style="font-size:16px; padding:8px 12px;" title="تشغيل/كتم الصوت">🔊</span>
+      <span id="nav-home-link" class="btn btn-ghost btn-sm hidden" onclick="Nav.show('home')">الصفحة الرئيسية</span>
+      <span class="btn btn-primary btn-sm" onclick="Nav.show('dashboard')">لوحة التحكم</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HOME ============ -->
+<div id="view-home">
+
+  <div class="hero">
+    <div class="wrap">
+      <div class="element-tile">
+        <span class="num">العنصر ٢٥</span>
+        <span class="sym">Mn</span>
+        <span class="name">منى رزق — كيمياء</span>
+      </div>
+      <div>
+        <div class="eyebrow">مدرّسة كيمياء — دفعة كلية العلوم، جامعة حلوان</div>
+        <h1>الكيمياء بتبقى <em>سهلة وممتعة</em><br>مع منى رزق</h1>
+        <p class="lead">خبرة في تدريس الكيمياء لمرحلتي الابتدائي والإعدادي، مع تركيز على توقع أسئلة الامتحانات وتجهيز الطلاب ليكونوا من الأوائل في المدرسة والإدارة.</p>
+        <div class="hero-ctas">
+          <span class="btn btn-gold" onclick="Nav.show('dashboard')">دخول نظام المتابعة</span>
+          <a class="btn btn-ghost" style="color:#fff; border-color:#ffffff40;" href="#why">اعرف أكتر</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">ليه منى رزق</div>
+        <h2>خبرة أكاديمية وأسلوب مذاكرة بيوصل المعلومة</h2>
+        <p>مش بس شرح المنهج — كمان استراتيجية مذاكرة وامتحانات مبنية على متابعة كل طالب لوحده.</p>
+      </div>
+      <div class="cards3">
+        <div class="card">
+          <div class="mini-tile">01</div>
+          <h3>خريجة كلية العلوم — جامعة حلوان</h3>
+          <p>خلفية علمية قوية في الكيمياء بتترجم لشرح مبسط ومباشر، من غير تعقيد، يناسب مستوى كل مرحلة سنية.</p>
+        </div>
+        <div class="card">
+          <div class="mini-tile">02</div>
+          <h3>توقعات أسئلة الامتحان</h3>
+          <p>مذاكرة مركزة على الأسئلة المتوقعة والنقاط اللي بتتكرر في الامتحانات، عشان الطالب يذاكر صح مش يذاكر كتير.</p>
+        </div>
+        <div class="card">
+          <div class="mini-tile">03</div>
+          <h3>نتائج الأوائل</h3>
+          <p>سنين من الطلاب اللي حققوا أوائل على الفصل والمدرسة، بمتابعة مستمرة للدرجات والحضور لكل طالب.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">المراحل الدراسية</div>
+        <h2>مجموعات لكل مرحلة على حدة</h2>
+      </div>
+      <div class="stages">
+        <div class="stage-card">
+          <span class="tag">المرحلة الابتدائية</span>
+          <h3>تأسيس علمي سليم</h3>
+          <p style="color:var(--ink-soft); font-size:14px; line-height:1.8;">بداية صح لمادة الكيمياء بأسلوب مبسط، بيربط المعلومة بحياة الطالب اليومية.</p>
+          <ul>
+            <li>شرح مبسط بالصور والأمثلة</li>
+            <li>مراجعات دورية قصيرة</li>
+            <li>متابعة أول بأول مع ولي الأمر</li>
+          </ul>
+        </div>
+        <div class="stage-card">
+          <span class="tag">المرحلة الإعدادية</span>
+          <h3>استعداد كامل للامتحانات</h3>
+          <p style="color:var(--ink-soft); font-size:14px; line-height:1.8;">تعميق المنهج مع تدريب مكثف على نماذج الامتحانات وتوقعاتها.</p>
+          <ul>
+            <li>حل نماذج امتحانات سابقة</li>
+            <li>جلسات مراجعة قبل الامتحان</li>
+            <li>تقارير درجات وحضور تفصيلية</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>جاهزة تسجّلي طلابك وتتابعي حضورهم ودرجاتهم؟</h2>
+          <p>نظام بسيط لحفظ بيانات كل طالب ومتابعة كل حصة أول بأول.</p>
+        </div>
+        <span class="btn btn-gold" onclick="Nav.show('dashboard')">دخول لوحة التحكم</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+      <span>منى رزق — مدرّسة كيمياء | كلية العلوم، جامعة حلوان</span>
+      <span>نظام متابعة الطلاب الداخلي</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="view-dashboard">
+  <div class="wrap">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-top:26px; flex-wrap:wrap; gap:10px;">
+      <div>
+        <h2 style="font-size:22px; font-weight:800;">لوحة تحكم المتابعة</h2>
+        <p style="color:var(--ink-soft); font-size:13.5px; margin-top:4px;">بيانات الطلاب، الحصص، الحضور والدرجات — محفوظة تلقائيًا.</p>
+        <p id="storage-mode-note" style="color:var(--ink-soft); font-size:11.5px; margin-top:4px;"></p>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <span class="settings-link" onclick="Backup.export()">تنزيل نسخة احتياطية</span>
+        <span class="settings-link" onclick="document.getElementById('backup-file').click()">استيراد نسخة احتياطية</span>
+        <input type="file" id="backup-file" accept="application/json" class="hidden" onchange="Backup.import(event)">
+        <span class="settings-link" onclick="App.resetAll()">مسح كل البيانات</span>
+      </div>
+    </div>
+
+    <div class="dash-tabs">
+      <div class="dash-tab active" data-tab="students" onclick="Nav.tab('students')">الطلاب</div>
+      <div class="dash-tab" data-tab="sessions" onclick="Nav.tab('sessions')">الحصص والحضور</div>
+      <div class="dash-tab" data-tab="reports" onclick="Nav.tab('reports')">تقرير كل طالب</div>
+    </div>
+
+    <!-- STUDENTS PANEL -->
+    <div class="panel active" id="panel-students">
+      <div class="box" style="margin-bottom:22px;">
+        <h3><span class="dot"></span> استيراد بيانات الفورم</h3>
+
+        <p style="color:var(--ink-soft); font-size:13px; margin-bottom:6px; font-weight:700;">الطريقة الأضمن — رفع ملف مباشر</p>
+        <p style="color:var(--ink-soft); font-size:12.5px; margin-bottom:10px;">من الـ Google Sheet: File ← Download ← Comma Separated Values (.csv)، وبعدين ارفعي الملف اللي اتنزل هنا.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('gform-file').click()">اختاري ملف CSV</button>
+          <input type="file" id="gform-file" accept=".csv,text/csv" class="hidden" onchange="FormSync.importFromFile(event)">
+        </div>
+
+        <hr style="border:none; border-top:1px solid var(--line); margin:18px 0;">
+
+        <p style="color:var(--ink-soft); font-size:13px; margin-bottom:6px; font-weight:700;">مزامنة تلقائية باللينك (اختياري)</p>
+        <p style="color:var(--ink-soft); font-size:12.5px; margin-bottom:10px;">ممكن تتوقف بسبب سياسات جوجل الأمنية (CORS) — جربيها، ولو ظهر خطأ استخدمي رفع الملف فوق بدالها.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;">
+          <div class="field" style="flex:1; min-width:240px; margin-bottom:0;">
+            <label>لينك الـ CSV</label>
+            <input type="text" id="gform-url" placeholder="https://docs.google.com/spreadsheets/.../pub?output=csv" dir="ltr" style="text-align:left;">
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" onclick="FormSync.sync()">مزامنة بالينك</button>
+        </div>
+
+        <p id="gform-status" class="mono" style="font-size:11.5px; color:var(--ink-soft); margin-top:12px;"></p>
+      </div>
+      <div class="grid2">
+        <div class="box">
+          <h3><span class="dot"></span> <span id="student-form-title">إضافة طالب جديد</span></h3>
+          <form id="student-form" onsubmit="return Students.submit(event)">
+            <input type="hidden" id="s-id">
+            <div class="field"><label>اسم الطالب</label><input type="text" id="s-name" required placeholder="مثال: أحمد محمود"></div>
+            <div class="field"><label>المرحلة</label>
+              <select id="s-grade">
+                <option value="ابتدائي - الرابع">ابتدائي - الرابع</option>
+                <option value="ابتدائي - الخامس">ابتدائي - الخامس</option>
+                <option value="ابتدائي - السادس">ابتدائي - السادس</option>
+                <option value="إعدادي - الأول">إعدادي - الأول</option>
+                <option value="عدادي - الثاني">عدادي - الثاني</option>
+                <option value="إعدادي - الثالث">إعدادي - الثالث</option>
+              </select>
+            </div>
+            <div class="field"><label>رقم تليفون ولي الأمر</label><input type="text" id="s-parent" placeholder="01xxxxxxxxx"></div>
+            <div style="display:flex; gap:8px; margin-top:16px;">
+              <button type="submit" class="btn btn-primary btn-sm">حفظ الطالب</button>
+              <button type="button" class="btn btn-ghost btn-sm hidden" id="s-cancel" onclick="Students.cancelEdit()">إلغاء</button>
+            </div>
+          </form>
+        </div>
+        <div class="box">
+          <h3><span class="dot"></span> قائمة الطلاب <span id="student-count" style="color:var(--ink-soft); font-weight:400; font-size:12.5px;"></span></h3>
+          <div class="field-row" style="max-width:520px; margin-bottom:13px;">
+            <div class="field" style="margin-bottom:0;"><input type="text" id="student-search" placeholder="بحث بالاسم..." oninput="Students.filterChanged()"></div>
+            <div class="field" style="margin-bottom:0;">
+              <select id="student-grade-filter" onchange="Students.filterChanged()">
+                <option value="">كل المراحل</option>
+                <option value="ابتدائي - الرابع">ابتدائي - الرابع</option>
+                <option value="ابتدائي - الخامس">ابتدائي - الخامس</option>
+                <option value="ابتدائي - السادس">ابتدائي - السادس</option>
+                <option value="إعدادي - الأول">إعدادي - الأول</option>
+                <option value="عدادي - الثاني">عدادي - الثاني</option>
+                <option value="إعدادي - الثالث">إعدادي - الثالث</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="students-table">
+              <thead><tr><th>الاسم</th><th>المرحلة</th><th>رقم ولي الأمر</th><th></th></tr></thead>
+              <tbody id="students-tbody"></tbody>
+            </table>
+          </div>
+          <div id="students-pagination" style="display:flex; align-items:center; justify-content:center; gap:14px; margin-top:16px;"></div>
+          <div class="empty hidden" id="students-empty">
+            <div class="mini-tile" style="margin-inline:auto;">—</div>
+            لسه مفيش طلاب مسجلين. أضيفي أول طالب من الفورم.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SESSIONS PANEL -->
+    <div class="panel" id="panel-sessions">
+      <div class="grid2">
+        <div class="box">
+          <h3><span class="dot"></span> إضافة حصة جديدة</h3>
+          <form id="session-form" onsubmit="return Sessions.create(event)">
+            <div class="field"><label>تاريخ الحصة</label><input type="date" id="ss-date" required></div>
+            <div class="field"><label>عنوان / موضوع الحصة</label><input type="text" id="ss-title" required placeholder="مثال: الفصل الثالث - الذرة"></div>
+            <div class="field"><label>المرحلة / السنة</label>
+              <select id="ss-grade">
+                <option value="ابتدائي - الرابع">ابتدائي - الرابع</option>
+                <option value="ابتدائي - الخامس">ابتدائي - الخامس</option>
+                <option value="ابتدائي - السادس">ابتدائي - السادس</option>
+                <option value="إعدادي - الأول">إعدادي - الأول</option>
+                <option value="عدادي - الثاني">عدادي - الثاني</option>
+                <option value="إعدادي - الثالث">إعدادي - الثالث</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">إنشاء الحصة</button>
+          </form>
+          <hr style="border:none; border-top:1px solid var(--line); margin:18px 0;">
+          <h3 style="margin-bottom:12px;"><span class="dot"></span> الحصص السابقة</h3>
+          <div id="sessions-list"></div>
+          <div class="empty hidden" id="sessions-empty">لسه مفيش حصص متسجلة.</div>
+        </div>
+        <div class="box" id="attendance-box">
+          <div id="attendance-empty" class="empty">
+            <div class="mini-tile" style="margin-inline:auto;">↺</div>
+            اختاري حصة من القائمة، أو أنشئي حصة جديدة، عشان تسجلي الحضور والدرجات.
+          </div>
+          <div id="attendance-content" class="hidden">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+              <div>
+                <h3 id="att-title" style="margin-bottom:2px;"></h3>
+                <span class="mono" id="att-date" style="font-size:12.5px; color:var(--ink-soft);"></span>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button class="btn btn-primary btn-sm" onclick="Sessions.save()">حفظ الحضور والدرجات</button>
+                <button class="btn btn-danger btn-sm" onclick="Sessions.remove()">حذف الحصة</button>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 90px 110px; gap:12px; padding-bottom:8px; border-bottom:1px solid var(--line); font-size:12px; color:var(--ink-soft); font-weight:700;">
+              <span>الطالب</span><span style="text-align:center;">حضر</span><span style="text-align:center;">الدرجة</span>
+            </div>
+            <div id="att-rows"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORTS PANEL -->
+    <div class="panel" id="panel-reports">
+      <div class="box" style="max-width:420px; margin-bottom:22px;">
+        <h3><span class="dot"></span> اختاري طالب</h3>
+        <div class="field">
+          <label>المرحلة / السنة</label>
+          <select id="report-grade-filter" onchange="Reports.onGradeChange()">
+            <option value="">كل المراحل</option>
+            <option value="ابتدائي - الرابع">ابتدائي - الرابع</option>
+            <option value="ابتدائي - الخامس">ابتدائي - الخامس</option>
+            <option value="ابتدائي - السادس">ابتدائي - السادس</option>
+            <option value="إعدادي - الأول">إعدادي - الأول</option>
+            <option value="عدادي - الثاني">عدادي - الثاني</option>
+            <option value="إعدادي - الثالث">إعدادي - الثالث</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>بحث بالاسم</label>
+          <input type="text" id="report-name-filter" placeholder="اكتبي اسم الطالب..." oninput="Reports.onGradeChange()">
+        </div>
+        <div class="field">
+          <label>الطالب</label>
+          <select id="report-select" onchange="Reports.render()"></select>
+        </div>
+      </div>
+      <div id="report-content"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= Storage helpers ================= */
+/* Priority: Claude's window.storage (works inside Claude chat, syncs to account)
+   -> browser localStorage (works when this file is opened directly/offline, double-click)
+   -> in-memory (last resort, data lost on reload) */
+const _memoryFallback = new Map();
+const HAS_CLAUDE_STORAGE = (typeof window.storage !== 'undefined' && window.storage && typeof window.storage.set === 'function');
+let HAS_LOCAL_STORAGE = false;
+try{
+  const testKey = '__mona_rizk_test__';
+  window.localStorage.setItem(testKey, '1');
+  window.localStorage.removeItem(testKey);
+  HAS_LOCAL_STORAGE = true;
+}catch(e){ HAS_LOCAL_STORAGE = false; }
+
+const LS_PREFIX = 'mona-rizk-system::';
+
+const Store = {
+  async getJSON(key, fallback){
+    try{
+      if(HAS_CLAUDE_STORAGE){
+        const r = await window.storage.get(key, false);
+        return r ? JSON.parse(r.value) : fallback;
+      } else if(HAS_LOCAL_STORAGE){
+        const raw = window.localStorage.getItem(LS_PREFIX+key);
+        return raw !== null ? JSON.parse(raw) : fallback;
+      } else {
+        return _memoryFallback.has(key) ? JSON.parse(_memoryFallback.get(key)) : fallback;
+      }
+    }catch(e){ return fallback; }
+  },
+  async setJSON(key, value){
+    try{
+      if(HAS_CLAUDE_STORAGE){
+        const r = await window.storage.set(key, JSON.stringify(value), false);
+        return !!r;
+      } else if(HAS_LOCAL_STORAGE){
+        window.localStorage.setItem(LS_PREFIX+key, JSON.stringify(value));
+        return true;
+      } else {
+        _memoryFallback.set(key, JSON.stringify(value));
+        return true;
+      }
+    }catch(e){ console.error('storage set failed', key, e); toast('حصل خطأ في الحفظ — جرّبي تاني', 'error'); return false; }
+  },
+  async delete(key){
+    try{
+      if(HAS_CLAUDE_STORAGE){ await window.storage.delete(key, false); }
+      else if(HAS_LOCAL_STORAGE){ window.localStorage.removeItem(LS_PREFIX+key); }
+      else { _memoryFallback.delete(key); }
+    }catch(e){ /* ignore */ }
+  }
+};
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  if(!HAS_CLAUDE_STORAGE && !HAS_LOCAL_STORAGE){
+    const bar = document.createElement('div');
+    bar.style.cssText = 'position:sticky;top:0;z-index:200;background:#C1443A;color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:700;';
+    bar.textContent = 'تنبيه: المتصفح ده مانع التخزين خالص (وضع تصفح خاص مثلاً) — البيانات هتتفقد لو قفلتِ الصفحة. جربي متصفح تاني أو افتحي الملف من غير وضع التصفح الخفي.';
+    document.body.prepend(bar);
+  }
+});
+
+/* ================= Sound ================= */
+const Sound = {
+  ctx: null,
+  enabled: true,
+  ensureCtx(){
+    if(!this.ctx){
+      try{ this.ctx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){ this.ctx = null; }
+    }
+    return this.ctx;
+  },
+  tone(freq, duration, delay=0, volume=0.06, type='sine'){
+    if(!this.enabled) return;
+    const ctx = this.ensureCtx();
+    if(!ctx) return;
+    if(ctx.state === 'suspended') ctx.resume();
+    const start = ctx.currentTime + delay;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(volume, start);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + duration + 0.02);
+  },
+  click(){ this.tone(560, 0.05, 0, 0.04); },
+  success(){ this.tone(660, 0.09, 0, 0.06); this.tone(880, 0.12, 0.09, 0.05); },
+  error(){ this.tone(200, 0.2, 0, 0.07, 'triangle'); },
+  toggle(){
+    this.enabled = !this.enabled;
+    Store.setJSON('sound-enabled', this.enabled);
+    const btn = document.getElementById('sound-toggle');
+    if(btn) btn.textContent = this.enabled ? '🔊' : '🔇';
+  }
+};
+Store.getJSON('sound-enabled', true).then(v => {
+  Sound.enabled = v;
+  const btn = document.getElementById('sound-toggle');
+  if(btn) btn.textContent = Sound.enabled ? '🔊' : '🔇';
+});
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('.btn, .dash-tab, .session-list-item, .brand');
+  if(el) Sound.click();
+});
+
+function toast(msg, type){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toast._h);
+  toast._h = setTimeout(()=>t.classList.remove('show'), 2200);
+  if(type === 'error') Sound.error();
+  else if(type === 'success') Sound.success();
+}
+function uid(prefix){
+  return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+}
+function esc(str){
+  return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ================= Nav ================= */
+const Nav = {
+  show(view){
+    document.getElementById('view-home').style.display = view==='home' ? 'block':'none';
+    document.getElementById('view-dashboard').style.display = view==='dashboard' ? 'block':'none';
+    document.getElementById('nav-home-link').classList.toggle('hidden', view==='home');
+    window.scrollTo({top:0, behavior:'instant'});
+    if(view==='dashboard') App.initDashboard();
+  },
+  tab(name){
+    document.querySelectorAll('.dash-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+name).classList.add('active');
+    if(name==='reports') Reports.init();
+  }
+};
+
+/* ================= App / global state ================= */
+const App = {
+  students: [],   // {id, name, code, grade, phone, parent}
+  sessions: [],   // {id, date, title}
+  initialized: false,
+
+  async initDashboard(){
+    if(this.initialized) return;
+    this.initialized = true;
+    const studentIds = await Store.getJSON('students-index', []);
+    const students = [];
+    for(const id of studentIds){
+      const s = await Store.getJSON('student:'+id, null);
+      if(s) students.push(s);
+    }
+    this.students = students;
+
+    const sessionIds = await Store.getJSON('sessions-index', []);
+    const sessions = [];
+    for(const id of sessionIds){
+      const s = await Store.getJSON('session:'+id, null);
+      if(s) sessions.push(s);
+    }
+    sessions.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+    this.sessions = sessions;
+
+    const noteEl = document.getElementById('storage-mode-note');
+    if(noteEl){
+      if(HAS_CLAUDE_STORAGE) noteEl.textContent = 'وضع الحفظ: متصل بحساب كلود.';
+      else if(HAS_LOCAL_STORAGE) noteEl.textContent = 'وضع الحفظ: محفوظ محليًا على المتصفح ده — يفضّل تاخدي نسخة احتياطية بشكل دوري.';
+      else noteEl.textContent = 'تحذير: مفيش حفظ دائم متاح دلوقتي.';
+    }
+
+    Students.render();
+    Sessions.renderList();
+
+    await FormSync.init();
+    if(document.getElementById('gform-url').value.trim()){
+      FormSync.sync(true);
+    }
+  },
+
+  async resetAll(){
+    if(!confirm('هيتم حذف كل بيانات الطلاب والحصص والحضور نهائيًا. متأكدة؟')) return;
+    for(const s of this.students){ await Store.delete('student:'+s.id); }
+    for(const s of this.sessions){ await Store.delete('session:'+s.id); await Store.delete('record:'+s.id); }
+    await Store.setJSON('students-index', []);
+    await Store.setJSON('sessions-index', []);
+    await Store.setJSON('gform-imported-ts', []);
+    await Store.setJSON('gform-last-sync', null);
+    this.students = []; this.sessions = [];
+    Students.render(); Sessions.renderList();
+    document.getElementById('attendance-content').classList.add('hidden');
+    document.getElementById('attendance-empty').classList.remove('hidden');
+    toast('اتمسحت كل البيانات', 'success');
+  }
+};
+
+/* ================= Google Form sync ================= */
+function parseCSV(text){
+  const lines = text.split(/\r\n|\n/).filter(l => l.length > 0);
+  if(lines.length === 0) return {headers:[], rows:[]};
+  const parseLine = (line) => {
+    const out = [];
+    let cur = '', inQuotes = false;
+    for(let i=0; i<line.length; i++){
+      const c = line[i];
+      if(inQuotes){
+        if(c === '"'){
+          if(line[i+1] === '"'){ cur += '"'; i++; } else { inQuotes = false; }
+        } else cur += c;
+      } else {
+        if(c === '"') inQuotes = true;
+        else if(c === ','){ out.push(cur); cur = ''; }
+        else cur += c;
+      }
+    }
+    out.push(cur);
+    return out;
+  };
+  const headers = parseLine(lines[0]).map(h => h.trim());
+  const rows = lines.slice(1).map(line => {
+    const vals = parseLine(line);
+    const obj = {};
+    headers.forEach((h,i) => obj[h] = (vals[i] || '').trim());
+    return obj;
+  });
+  return {headers, rows};
+}
+
+const FormSync = {
+  async init(){
+    const url = await Store.getJSON('gform-csv-url', '');
+    const urlInput = document.getElementById('gform-url');
+    if(urlInput && url) urlInput.value = url;
+    await this.refreshStatus();
+  },
+  async refreshStatus(extra){
+    const statusEl = document.getElementById('gform-status');
+    if(!statusEl) return;
+    const last = await Store.getJSON('gform-last-sync', null);
+    const lastText = last ? ('آخر تحديث: ' + new Date(last).toLocaleString('ar-EG')) : 'لسه مفيش تحديث';
+    statusEl.textContent = extra ? (lastText + ' — ' + extra) : lastText;
+  },
+
+  // Shared logic: takes raw CSV text, imports any new rows, returns {added, error}
+  async importCSVText(text){
+    const {headers, rows} = parseCSV(text);
+    // exact match first, then loose (contains-based, case/space-insensitive) match
+    const norm = (s) => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'');
+    const find = (cands) => {
+      let hit = headers.find(h => cands.includes(h));
+      if(hit) return hit;
+      const nCands = cands.map(norm);
+      hit = headers.find(h => nCands.some(c => norm(h).includes(c) || c.includes(norm(h))));
+      return hit;
+    };
+    let nameKey = find(['اسم الطالب', 'اسم الطالبة', 'الاسم', 'اسم', 'name', 'studentname', 'student name']);
+    const parentKey = find(['رقم ولي الأمر', 'رقم تليفون ولي الأمر', 'ولي الأمر', 'رقم الهاتف', 'رقم التليفون', 'parent', 'phone']);
+    const gradeKey = find(['المرحلة', 'الصف', 'grade', 'class']);
+
+    // Fallback: no recognizable name column found — accept the file anyway.
+    // Use the first column as the name column so any .csv can be imported.
+    if(!nameKey && headers.length){
+      nameKey = headers[0];
+    }
+    if(!nameKey){
+      return {added:0, error:'الملف فاضي أو مش متعرف عليه'};
+    }
+
+    // Dedupe against students who currently exist (not a historical import log).
+    // This means: existing students are left untouched and never duplicated,
+    // new names in the file get added, and if the list was cleared beforehand,
+    // every row in the file counts as new and gets imported.
+    const existingNames = new Set(App.students.map(s => norm(s.name)));
+    const newIds = [];
+    let added = 0;
+
+    for(const row of rows){
+      const name = (row[nameKey] || '').trim();
+      if(!name) continue;
+      const key = norm(name);
+      if(existingNames.has(key)) continue; // already have this student — leave as is
+
+      const id = uid('st');
+      const student = {
+        id,
+        name,
+        grade: gradeKey ? (row[gradeKey] || '') : '',
+        parent: parentKey ? (row[parentKey] || '') : ''
+      };
+      App.students.push(student);
+      await Store.setJSON('student:'+id, student);
+      newIds.push(id);
+      existingNames.add(key); // avoid re-adding duplicate rows within the same file
+      added++;
+    }
+
+    if(newIds.length){
+      const idx = await Store.getJSON('students-index', []);
+      await Store.setJSON('students-index', idx.concat(newIds));
+    }
+    await Store.setJSON('gform-last-sync', new Date().toISOString());
+    return {added, error:null};
+  },
+
+  // Reliable path: user downloads the sheet as CSV and uploads it here (no network call, no CORS)
+  importFromFile(event){
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const {added, error} = await this.importCSVText(reader.result);
+      if(error){
+        toast(error, 'error');
+      } else {
+        await this.refreshStatus(added > 0 ? `${added} طالب جديد` : 'مفيش جديد');
+        Students.render();
+        toast(added > 0 ? `اتضاف ${added} طالب من الملف` : 'مفيش تسجيلات جديدة في الملف ده', added > 0 ? 'success' : undefined);
+      }
+      event.target.value = '';
+    };
+    reader.onerror = () => toast('مقدرتش أقرأ الملف', 'error');
+    reader.readAsText(file, 'UTF-8');
+  },
+
+  // Best-effort path: fetch the published link directly (may fail due to Google's CORS policy)
+  async sync(silent){
+    const urlInput = document.getElementById('gform-url');
+    const url = urlInput.value.trim();
+    if(!url){
+      if(!silent) toast('حطي لينك الـ CSV الأول', 'error');
+      return;
+    }
+    await Store.setJSON('gform-csv-url', url);
+    const statusEl = document.getElementById('gform-status');
+    if(statusEl) statusEl.textContent = 'جاري المزامنة...';
+
+    try{
+      const res = await fetch(url, {cache:'no-store'});
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      const text = await res.text();
+      const {added, error} = await this.importCSVText(text);
+      if(error){
+        await this.refreshStatus();
+        toast(error, 'error');
+        return;
+      }
+      await this.refreshStatus(added > 0 ? `${added} طالب جديد` : 'مفيش جديد');
+      Students.render();
+      if(added > 0) toast(`اتضاف ${added} طالب من الفورم`, 'success');
+      else if(!silent) toast('مفيش تسجيلات جديدة دلوقتي');
+    }catch(e){
+      console.error(e);
+      await this.refreshStatus();
+      if(!silent) toast('فشلت المزامنة — تأكدي إن اللينك عام (Publish to web) ومتاح', 'error');
+    }
+  }
+};
+
+/* ================= Backup (export / import) ================= */
+const Backup = {
+  async export(){
+    const data = { version:1, exportedAt: new Date().toISOString(), students: [], sessions: [], records: {} };
+    for(const s of App.students){ data.students.push(s); }
+    for(const s of App.sessions){
+      data.sessions.push(s);
+      data.records[s.id] = await Store.getJSON('record:'+s.id, {});
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const stamp = new Date().toISOString().slice(0,10);
+    a.href = url;
+    a.download = `mona-rizk-backup-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    toast('اتنزلت النسخة الاحتياطية', 'success');
+  },
+
+  import(event){
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try{
+        const data = JSON.parse(reader.result);
+        if(!data || !Array.isArray(data.students) || !Array.isArray(data.sessions)){
+          toast('الملف مش بصيغة نسخة احتياطية صحيحة', 'error');
+          return;
+        }
+        if(!confirm(`هيتم استيراد ${data.students.length} طالب و ${data.sessions.length} حصة. البيانات الحالية مش هتتمسح، بس ممكن تتكرر لو الملف ده اتعمل من نفس النظام قبل كده. تكملي؟`)) return;
+
+        for(const s of data.students){
+          App.students.push(s);
+          await Store.setJSON('student:'+s.id, s);
+        }
+        const studentIdx = await Store.getJSON('students-index', []);
+        await Store.setJSON('students-index', studentIdx.concat(data.students.map(s=>s.id)));
+
+        for(const s of data.sessions){
+          App.sessions.push(s);
+          await Store.setJSON('session:'+s.id, s);
+          await Store.setJSON('record:'+s.id, data.records[s.id] || {});
+        }
+        const sessionIdx = await Store.getJSON('sessions-index', []);
+        await Store.setJSON('sessions-index', sessionIdx.concat(data.sessions.map(s=>s.id)));
+
+        App.sessions.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+        Students.render();
+        Sessions.renderList();
+        toast('اتم الاستيراد بنجاح', 'success');
+      }catch(e){
+        console.error(e);
+        toast('حصل خطأ أثناء قراءة الملف', 'error');
+      }
+      event.target.value = '';
+    };
+    reader.readAsText(file);
+  }
+};
+
+/* ================= Students ================= */
+const Students = {
+  editingId: null,
+  page: 1,
+  pageSize: 10,
+
+  filterChanged(){
+    this.page = 1;
+    this.render();
+  },
+
+  async submit(e){
+    e.preventDefault();
+    const name = document.getElementById('s-name').value.trim();
+    const grade = document.getElementById('s-grade').value;
+    const parent = document.getElementById('s-parent').value.trim();
+    if(!name) return false;
+
+    if(this.editingId){
+      const s = App.students.find(x=>x.id===this.editingId);
+      Object.assign(s, {name, grade, parent});
+      await Store.setJSON('student:'+s.id, s);
+      toast('اتحدثت بيانات الطالب', 'success');
+      this.cancelEdit();
+    } else {
+      const id = uid('st');
+      const student = {id, name, grade, parent};
+      App.students.push(student);
+      await Store.setJSON('student:'+id, student);
+      const idx = await Store.getJSON('students-index', []);
+      idx.push(id);
+      await Store.setJSON('students-index', idx);
+      document.getElementById('student-form').reset();
+      toast('اتضاف الطالب بنجاح', 'success');
+    }
+    this.render();
+    Sessions.rebuildAttendanceRowsIfOpen();
+    return false;
+  },
+
+  edit(id){
+    const s = App.students.find(x=>x.id===id);
+    if(!s) return;
+    this.editingId = id;
+    document.getElementById('s-id').value = id;
+    document.getElementById('s-name').value = s.name;
+    document.getElementById('s-grade').value = s.grade;
+    document.getElementById('s-parent').value = s.parent || '';
+    document.getElementById('student-form-title').textContent = 'تعديل بيانات الطالب';
+    document.getElementById('s-cancel').classList.remove('hidden');
+    document.getElementById('s-name').scrollIntoView({behavior:'smooth', block:'center'});
+  },
+
+  cancelEdit(){
+    this.editingId = null;
+    document.getElementById('student-form').reset();
+    document.getElementById('student-form-title').textContent = 'إضافة طالب جديد';
+    document.getElementById('s-cancel').classList.add('hidden');
+  },
+
+  async remove(id){
+    if(!confirm('حذف هذا الطالب من النظام؟')) return;
+    App.students = App.students.filter(s=>s.id!==id);
+    await Store.delete('student:'+id);
+    const idx = await Store.getJSON('students-index', []);
+    await Store.setJSON('students-index', idx.filter(x=>x!==id));
+    this.render();
+    toast('اتحذف الطالب', 'success');
+  },
+
+  render(){
+    const q = (document.getElementById('student-search')?.value || '').trim().toLowerCase();
+    const gradeFilter = document.getElementById('student-grade-filter')?.value || '';
+    const filtered = App.students.filter(s =>
+      (!q || s.name.toLowerCase().includes(q)) &&
+      (!gradeFilter || s.grade === gradeFilter)
+    );
+
+    const totalPages = Math.max(1, Math.ceil(filtered.length / this.pageSize));
+    if(this.page > totalPages) this.page = totalPages;
+    if(this.page < 1) this.page = 1;
+    const start = (this.page - 1) * this.pageSize;
+    const list = filtered.slice(start, start + this.pageSize);
+
+    const tbody = document.getElementById('students-tbody');
+    document.getElementById('student-count').textContent = App.students.length ? `(${filtered.length} من ${App.students.length})` : '';
+    tbody.innerHTML = list.map(s => `
+      <tr>
+        <td>${esc(s.name)}</td>
+                <td>${esc(s.grade)}</td>
+        <td class="mono">${esc(s.parent||'—')}</td>
+        <td class="row-actions">
+          <button class="btn btn-ghost btn-sm" onclick="Students.edit('${s.id}')">تعديل</button>
+          <button class="btn btn-danger btn-sm" onclick="Students.remove('${s.id}')">حذف</button>
+        </td>
+      </tr>`).join('');
+    document.getElementById('students-empty').classList.toggle('hidden', App.students.length>0);
+
+    const pagEl = document.getElementById('students-pagination');
+    if(pagEl){
+      if(filtered.length <= this.pageSize){
+        pagEl.innerHTML = '';
+      } else {
+        pagEl.innerHTML = `
+          <button class="btn btn-ghost btn-sm" ${this.page<=1?'disabled':''} onclick="Students.goPage(${this.page-1})">السابق</button>
+          <span class="mono" style="font-size:12.5px; color:var(--ink-soft);">صفحة ${this.page} من ${totalPages}</span>
+          <button class="btn btn-ghost btn-sm" ${this.page>=totalPages?'disabled':''} onclick="Students.goPage(${this.page+1})">التالي</button>
+        `;
+      }
+    }
+    // keep reports dropdown fresh
+    Reports.populateSelect();
+  },
+
+  goPage(p){
+    this.page = p;
+    this.render();
+  }
+};
+
+/* ================= Sessions ================= */
+const Sessions = {
+  currentId: null,
+
+  async create(e){
+    e.preventDefault();
+    const date = document.getElementById('ss-date').value;
+    const title = document.getElementById('ss-title').value.trim();
+    const grade = document.getElementById('ss-grade').value;
+    if(!date || !title) return false;
+    const id = uid('ss');
+    const session = {id, date, title, grade};
+    App.sessions.unshift(session);
+    App.sessions.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+    await Store.setJSON('session:'+id, session);
+    const idx = await Store.getJSON('sessions-index', []);
+    idx.push(id);
+    await Store.setJSON('sessions-index', idx);
+    await Store.setJSON('record:'+id, {});
+    document.getElementById('session-form').reset();
+    this.renderList();
+    this.open(id);
+    toast('اتضافت الحصة', 'success');
+    return false;
+  },
+
+  renderList(){
+    const box = document.getElementById('sessions-list');
+    box.innerHTML = App.sessions.map(s => `
+      <div class="session-list-item ${s.id===this.currentId?'active':''}" onclick="Sessions.open('${s.id}')">
+        <div class="d">${esc(s.date)} ${s.grade ? '· '+esc(s.grade) : ''}</div>
+        <div class="t">${esc(s.title)}</div>
+      </div>`).join('');
+    document.getElementById('sessions-empty').classList.toggle('hidden', App.sessions.length>0);
+  },
+
+  async open(id){
+    this.currentId = id;
+    this.renderList();
+    const session = App.sessions.find(s=>s.id===id);
+    if(!session) return;
+    document.getElementById('attendance-empty').classList.add('hidden');
+    document.getElementById('attendance-content').classList.remove('hidden');
+    document.getElementById('att-title').textContent = session.title;
+    document.getElementById('att-date').textContent = session.date + (session.grade ? ' — ' + session.grade : '');
+
+    const record = await Store.getJSON('record:'+id, {});
+    this._currentRecord = record;
+    this.renderAttendanceRows(record);
+  },
+
+  renderAttendanceRows(record){
+    const rows = document.getElementById('att-rows');
+    const session = App.sessions.find(s=>s.id===this.currentId);
+    const grade = session ? session.grade : null;
+    const list = grade ? App.students.filter(s=>s.grade===grade) : App.students;
+    if(App.students.length === 0){
+      rows.innerHTML = `<div class="empty">لازم تضيفي طلاب الأول من تبويب "الطلاب".</div>`;
+      return;
+    }
+    if(list.length === 0){
+      rows.innerHTML = `<div class="empty">مفيش طلاب مسجلين في "${esc(grade||'')}" لسه.</div>`;
+      return;
+    }
+    rows.innerHTML = list.map(s => {
+      const r = record[s.id] || {attended:false, score:''};
+      return `
+      <div class="att-row" data-student="${s.id}">
+        <div class="att-name">${esc(s.name)}</div>
+        <label class="toggle"><input type="checkbox" class="att-attended" ${r.attended?'checked':''}></label>
+        <input type="number" class="att-score" min="0" max="100" placeholder="—" value="${r.score!==undefined && r.score!==null && r.score!=='' ? r.score : ''}">
+      </div>`;
+    }).join('');
+  },
+
+  rebuildAttendanceRowsIfOpen(){
+    if(this.currentId){
+      this.renderAttendanceRows(this._currentRecord || {});
+    }
+  },
+
+  async save(){
+    if(!this.currentId) return;
+    const record = {};
+    document.querySelectorAll('#att-rows .att-row').forEach(row=>{
+      const sid = row.dataset.student;
+      const attended = row.querySelector('.att-attended').checked;
+      const scoreVal = row.querySelector('.att-score').value;
+      record[sid] = { attended, score: scoreVal === '' ? null : Number(scoreVal) };
+    });
+    this._currentRecord = record;
+    const ok = await Store.setJSON('record:'+this.currentId, record);
+    toast(ok ? 'اتحفظ الحضور والدرجات' : 'حصل خطأ — البيانات متحفظتش', ok ? 'success' : 'error');
+  },
+
+  async remove(){
+    if(!this.currentId) return;
+    if(!confirm('حذف هذه الحصة وكل بيانات الحضور فيها؟')) return;
+    const id = this.currentId;
+    App.sessions = App.sessions.filter(s=>s.id!==id);
+    await Store.delete('session:'+id);
+    await Store.delete('record:'+id);
+    const idx = await Store.getJSON('sessions-index', []);
+    await Store.setJSON('sessions-index', idx.filter(x=>x!==id));
+    this.currentId = null;
+    this.renderList();
+    document.getElementById('attendance-content').classList.add('hidden');
+    document.getElementById('attendance-empty').classList.remove('hidden');
+    toast('اتحذفت الحصة', 'success');
+  }
+};
+
+/* ================= Reports ================= */
+const Reports = {
+  init(){
+    this.populateSelect();
+    this.render();
+  },
+  filteredStudents(){
+    const grade = document.getElementById('report-grade-filter')?.value || '';
+    const q = (document.getElementById('report-name-filter')?.value || '').trim().toLowerCase();
+    return App.students.filter(s =>
+      (!grade || s.grade === grade) &&
+      (!q || s.name.toLowerCase().includes(q))
+    );
+  },
+  onGradeChange(){
+    this.populateSelect();
+    this.render();
+  },
+  populateSelect(){
+    const sel = document.getElementById('report-select');
+    if(!sel) return;
+    const current = sel.value;
+    const list = this.filteredStudents();
+    if(!list.length){
+      sel.innerHTML = `<option value="">لا يوجد طلاب مطابقين</option>`;
+      return;
+    }
+    sel.innerHTML = list.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');
+    if(current && list.some(s=>s.id===current)) sel.value = current;
+  },
+  async render(){
+    const container = document.getElementById('report-content');
+    if(!App.students.length){
+      container.innerHTML = `<div class="empty">لسه مفيش طلاب مسجلين لعرض تقاريرهم.</div>`;
+      return;
+    }
+    const list = this.filteredStudents();
+    if(!list.length){
+      container.innerHTML = `<div class="empty">مفيش طلاب مطابقين لبحثك.</div>`;
+      return;
+    }
+    const selectedVal = document.getElementById('report-select').value;
+    const sid = (selectedVal && list.some(s=>s.id===selectedVal)) ? selectedVal : list[0].id;
+    const student = App.students.find(s=>s.id===sid);
+    if(!student){ container.innerHTML=''; return; }
+
+    container.innerHTML = `<div class="empty">جاري تحميل التقرير...</div>`;
+
+    const relevantSessions = App.sessions.filter(sess => !sess.grade || sess.grade === student.grade);
+
+    const rows = [];
+    for(const session of relevantSessions){
+      const record = await Store.getJSON('record:'+session.id, {});
+      const r = record[sid];
+      rows.push({
+        date: session.date,
+        title: session.title,
+        attended: r ? !!r.attended : false,
+        score: r && r.score !== null && r.score !== undefined ? r.score : null,
+        hasRecord: !!r
+      });
+    }
+    rows.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+
+    const totalSessions = rows.length;
+    const attendedCount = rows.filter(r=>r.attended).length;
+    const scored = rows.filter(r=>r.attended && r.score!==null);
+    const avg = scored.length ? (scored.reduce((sum,r)=>sum+r.score,0)/scored.length).toFixed(1) : '—';
+    const attendanceRate = totalSessions ? Math.round((attendedCount/totalSessions)*100) : 0;
+
+    container.innerHTML = `
+      <p style="font-size:12.5px; color:var(--ink-soft); margin-bottom:10px;">الإحصائيات محسوبة على حصص "${esc(student.grade)}" فقط.</p>
+      <div class="stat-row">
+        <div class="stat-box"><div class="v">${attendedCount}/${totalSessions}</div><div class="l">عدد مرات الحضور</div></div>
+        <div class="stat-box"><div class="v">${attendanceRate}%</div><div class="l">نسبة الحضور</div></div>
+        <div class="stat-box"><div class="v">${avg}</div><div class="l">متوسط الدرجات</div></div>
+      </div>
+      <div class="box">
+        <h3><span class="dot"></span> ${esc(student.name)} <span class="mono" style="font-weight:400; color:var(--ink-soft); font-size:12.5px;">${esc(student.grade)}</span></h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>التاريخ</th><th>الحصة</th><th>الحضور</th><th>الدرجة</th></tr></thead>
+            <tbody>
+              ${totalSessions ? rows.map(r=>`
+                <tr>
+                  <td class="mono">${esc(r.date)}</td>
+                  <td>${esc(r.title)}</td>
+                  <td>${r.attended ? '<span class="badge badge-yes">حاضر</span>' : '<span class="badge badge-no">غائب</span>'}</td>
+                  <td>${r.attended && r.score!==null ? r.score : '—'}</td>
+                </tr>`).join('') : `<tr><td colspan="4" class="empty">لسه مفيش حصص متسجلة.</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+};
+
+/* default date = today for new session form */
+document.getElementById('ss-date').value = new Date().toISOString().slice(0,10);
+</script>
+</body>
+</html>
